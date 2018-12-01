@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
 
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
     socket.emit('newMessage', generateMessage('Angular', 'Welcome to the ower chat!'));
-    socket.broadcast.to(params.room).emit('newMessage', generateMessage('Angular', `${params.name}`));
+    socket.broadcast.to(params.room).emit('newMessage', generateMessage(`${params.name}`, 'Joined chat'));
     callback();
   });
 
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-      io.to(user.room).emit('newMessage', generateMessage('Angular', `${user.name} has left.`));
+      io.to(user.room).emit('newMessage', generateMessage(`${user.name}`, 'Left the conversation'));
     }
   });
 });
